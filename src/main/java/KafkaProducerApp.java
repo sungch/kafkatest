@@ -36,9 +36,10 @@ public class KafkaProducerApp {
         int counter = 0;
         try {
             while (true) {
-                sleep(5000);
                 for(String topic : topics) {
-                    myProducer.send(new ProducerRecord(topic, msg + counter++));
+                    myProducer.send(new ProducerRecord(topic, msg + ":" + counter++));
+                    System.out.println("posting " + msg + topic + ":" + counter);
+                    sleep(5000);
                 }
             }
         }
