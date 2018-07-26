@@ -19,13 +19,27 @@ public class KafkaProducerApp {
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         KafkaProducer<String,String> myProducer = new KafkaProducer<String, String>(props);
-        String topic = "test0";
-        String msg  ="Message to test topic.";
+        String[] topics = {"test0",
+                "cmp.mailbox",
+                "idx.export",
+                "idx.metric",
+                "idx.orchestration",
+                "idx.project",
+                "idx.rawmetrics",
+                "idx.rosetta",
+                "idx.statistic",
+                "idx.system",
+                "idx.template",
+                "idx.user",
+                "idx.workflow"};
+        String msg  ="Message to test topic: ";
         int counter = 0;
         try {
             while (true) {
                 sleep(5000);
-                myProducer.send(new ProducerRecord(topic, msg + counter++));
+                for(String topic : topics) {
+                    myProducer.send(new ProducerRecord(topic, msg + counter++));
+                }
             }
         }
         finally {
