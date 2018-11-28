@@ -35,6 +35,7 @@ public class KafkaProducerApp {
         String msg  ="Message to test topic: ";
         int counter = 0;
         try {
+            System.out.println("Starting posting ... ");
             while (true) {
                 for(String topic : topics) {
                     myProducer.send(new ProducerRecord(topic, msg + ":" + counter++));

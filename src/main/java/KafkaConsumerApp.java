@@ -36,6 +36,7 @@ public class KafkaConsumerApp {
         myConsumer.subscribe(Arrays.asList(topics));
 
         try {
+            System.out.println("Consumer Started:");
             while (true) {
                 ConsumerRecords<String, String> records = myConsumer.poll(10);
                 for(ConsumerRecord r : records) {
